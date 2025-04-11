@@ -11,7 +11,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #f8f9fa;
         }
 
         .loading-container {
@@ -20,7 +20,8 @@
             height: 300px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            gap: 20px;
             padding: 0 40px;
         }
 
@@ -28,31 +29,39 @@
             position: relative;
             width: 120px;
             height: 120px;
-            background: #ffd7ba;
+            background: linear-gradient(135deg, #ffd7ba, #ffcba4);
             border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+
+        .face:hover {
+            transform: scale(1.05);
         }
 
         .mouth {
             position: absolute;
             width: 40px;
             height: 20px;
-            background: #ff6b6b;
+            background: linear-gradient(to bottom, #ff6b6b, #ff4757);
             border-radius: 0 0 20px 20px;
             bottom: 30px;
             left: 40px;
+            box-shadow: inset 0 -2px 4px rgba(0,0,0,0.1);
         }
 
         .tongue {
             position: absolute;
-            width: 80px;
+            width: 100px;
             height: 20px;
-            background: #ff4757;
+            background: linear-gradient(to right, #ff4757, #ff6b6b);
             border-radius: 0 10px 10px 0;
             bottom: 35px;
             left: 75px;
             transform-origin: left center;
-            animation: lick 5s infinite;
+            animation: lick 5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
 
         .tongue::before {
@@ -63,7 +72,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255,255,255,0.2) 50%,
+                rgba(255,255,255,0.3) 50%,
                 transparent
             );
         }
@@ -74,8 +83,15 @@
             height: 100px;
             background: linear-gradient(45deg, #f4d03f, #f1c40f);
             border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             overflow: hidden;
+            transition: transform 0.3s ease;
+            margin-left: -40px;
+            z-index: 1;
+        }
+
+        .bread:hover {
+            transform: scale(1.02);
         }
 
         .bread::before {
@@ -87,8 +103,8 @@
                 90deg,
                 transparent,
                 transparent 10px,
-                rgba(255,255,255,0.1) 10px,
-                rgba(255,255,255,0.1) 20px
+                rgba(255,255,255,0.15) 10px,
+                rgba(255,255,255,0.15) 20px
             );
         }
 
@@ -99,21 +115,22 @@
             height: 100%;
             background: radial-gradient(
                 circle at 50% 50%,
-                rgba(255,255,255,0.2) 0%,
-                transparent 60%
+                rgba(255,255,255,0.3) 0%,
+                transparent 70%
             );
         }
 
         .bread-bite {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #f0f0f0;
+            width: 25px;
+            height: 25px;
+            background: #f8f9fa;
             border-radius: 50%;
             top: 40%;
             left: 60%;
             opacity: 0;
-            animation: bite 5s infinite;
+            animation: bite 5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         @keyframes lick {
@@ -124,13 +141,13 @@
                 transform: scaleX(0);
             }
             25% {
-                transform: scaleX(1);
+                transform: scaleX(1.2);
             }
             30% {
                 transform: scaleX(0);
             }
             35% {
-                transform: scaleX(1);
+                transform: scaleX(1.2);
             }
             40% {
                 transform: scaleX(0);
@@ -164,10 +181,16 @@
             bottom: -40px;
             left: 50%;
             transform: translateX(-50%);
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             font-size: 16px;
-            color: #333;
+            color: #2c3e50;
             text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .progress.done {
+            color: #27ae60;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -185,7 +208,9 @@
 
     <script>
         setTimeout(() => {
-            document.querySelector('.progress').textContent = 'Done!';
+            const progress = document.querySelector('.progress');
+            progress.textContent = 'Done!';
+            progress.classList.add('done');
         }, 5000);
     </script>
 </body>
