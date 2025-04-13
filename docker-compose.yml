@@ -1,0 +1,13 @@
+services:
+  jausenschlecka:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8091:8091"
+    restart: unless-stopped
+    volumes:
+      - ./public:/app/public
+    # If you need environment variables, uncomment and add them below
+    # environment:
+    #   - KEY=value
